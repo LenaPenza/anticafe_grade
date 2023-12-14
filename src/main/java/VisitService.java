@@ -184,7 +184,7 @@ public class VisitService {
 
     /**
      * Получает среднюю продолжительность посещения для всех столов
-     * @return карта, где <i>ключи</i> - объекты столов, а значения - средняя продолжительность посещения в секундах
+     * @return карта, где <i>ключи</i> - объекты столов, а значения - средняя продолжительность посещения в минутах
      */
     public static Map<Table, DoubleSummaryStatistics> getAverageDurationOfAllTables() {
         return visits.stream()

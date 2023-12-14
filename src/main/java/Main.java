@@ -61,6 +61,7 @@ public class Main {
                     tableId = toDigit(tableIdLine);
                     try {
                         Visit visit = VisitService.createVisit(new Client(), tableId);
+                        logger.info("Столик успешно занят");
                         System.out.printf("Столик успешно занят.%n ID визита: %d%nСтарт визита: %s", visit.getId(), visit.getFormattedTime());
                     } catch (RuntimeException ex) {
                         logger.error(ex.getMessage());
@@ -79,8 +80,10 @@ public class Main {
                     }
 
                     catch (RuntimeException ex){
+                        logger.error(ex.getMessage());
                         System.out.println(ex.getMessage());
                     }
+                    logger.info("Столик освобожден");
 
 
                 }
@@ -88,6 +91,7 @@ public class Main {
                     System.out.println("Список занятых столиков: ");
                     for (Table table :VisitService.getReservedTables()){
                         System.out.println(table);
+                        logger.info("Выведен список занятых столов");
                     }
 
                 }
@@ -95,20 +99,25 @@ public class Main {
                     System.out.println("Список свободных столиков");
                     for (Table table :VisitService.getFreeTables()){
                         System.out.println(table);
+                        logger.info("Выведен список свободных столов");
                     }
                 }
                 case 5 ->{
                     System.out.println("Просмотр информации о том, сколько всего минут сидят за каждым столом");
                     System.out.println(VisitService.getTotalCurrentDuration());
+                    logger.info("Осуществлен просмотр информации о том, сколько всего минут сидят за каждым столом");
 
                 }
                 case 6 -> {
                     System.out.println("Выберите столик: ");
                     tableIdLine = in.nextLine();
                     tableId = toDigit(tableIdLine);
+                    logger.info("Осуществлен просмотр информации о том, сколько гостям нужно заплатить (конкретным)");
+
                     try {
                         System.out.println(VisitService.getCurrentCost(tableId));
                     } catch (RuntimeException ex) {
+                        logger.error(ex.getMessage());
                         System.out.println(ex.getMessage());
                     }
 
@@ -117,10 +126,12 @@ public class Main {
                     System.out.println("Просмотр информации о том, сколько придется заплатить всем гостям за столиками, если они прямо сейчас покинут антикафе");
                     System.out.println(VisitService.getTotalCurrentDuration());
                     System.out.println(VisitService.getTotalCurrentCost());
+                    logger.info("Осуществлен просмотр информации о том, сколько придется заплатить всем гостям за столиками, если они прямо сейчас покинут антикафе");
                 }
                 case 8 ->{
                     System.out.println("Общая прибыль");
                     System.out.println(VisitService.getTotalCostOfAllTime());
+                    logger.info("Просмотрена общая прибыль");
                 }
                 case 9 -> {
                     System.out.println("Cредняя занятость столика по времени");
@@ -130,24 +141,29 @@ public class Main {
                     ) {
                         System.out.println(table + ": " + map.get(table).getAverage());
                     }
+                    logger.info("Просмотрена информация о том, сколько в среднем занят столик по времени");
                 }
                 case 10 -> {
                     System.out.println("Столик, который чаще всего выбирается");
+                    logger.info("Просмотрена информация о том, какой столик чаще всего выбирается");
                     try {
                         System.out.println(VisitService.getTheMostPopularTable());
                     }
                     catch (RuntimeException ex){
                         System.out.println(ex.getMessage());
+                        logger.error(ex.getMessage());
                     }
 
                 }
                 case 11 -> {
                     System.out.println("Столик,принесший большего всего прибыли");
+                    logger.info("Просмотрена информация о том, какой столик принес больше всего прибыли");
                     try {
                         System.out.println(VisitService.getTheMostEarnedTable());
                     }
                     catch (RuntimeException ex){
                         System.out.println(ex.getMessage());
+                        logger.error(ex.getMessage());
                     }
 
                 }
@@ -159,6 +175,7 @@ public class Main {
                             System.out.printf("    Стоимость: %f рублей%n", visit.getCost());
                         System.out.println();
                     }
+                    logger.info("Выведен список всех визитов");
                 }
                 case 13 -> {
                     System.out.println("Список всех завершенных визитов");
@@ -167,6 +184,7 @@ public class Main {
                         if (visit.isFinished())
                             System.out.printf("    Стоимость: %f рублей", visit.getCost());
                     }
+                    logger.info("Выведен список всех завершенных визитов");
                 }
                 default -> System.out.println("Некоректный символ");
 

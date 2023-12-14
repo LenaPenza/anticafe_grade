@@ -1,7 +1,7 @@
 VisitService.java
  VisitService
-Main.java
- Main
+VisitServiceTest.java
+ VisitServiceTest
 TableService.java
  TableService
 Visit.java
@@ -10,5 +10,5 @@ Table.java
  Table
 Client.java
  Client
-VisitServiceTest.java
- VisitServiceTest
+Main.java
+ Main
