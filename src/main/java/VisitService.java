@@ -73,7 +73,7 @@ public class VisitService {
      */
     public static Visit finishVisit(int tableId) {
         if (tableId < 1 || tableId > 10)
-            throw new IllegalArgumentException("Всего 10 столиков, выберите в из них");
+            throw new IllegalArgumentException("Всего 10 столиков, выберите  из них");
         Table table = TableService.tables.get(tableId);
         if (table.isFree()){
             throw new RuntimeException("Выбранный столик свободен");
